@@ -5,8 +5,8 @@ const {Profile}=require("../model/profile")
 
 const clientsDetails=async(req,res)=>{
     try{
-        const id=req.query.org_id
-        const clients=await Profile.find({id:id})
+        const id=req.params.org_id
+        const clients=await Profile.findById({id:id})
         // console.log(Profile);
         // const clients=await Profile.find()
         res.json({

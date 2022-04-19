@@ -24,9 +24,10 @@ const storeProductBYID=async(req,res)=>{
 
 const All=async(req,res)=>{
     try{
-        const org_id=req.query.org_id.id
-        // const user=await Products.find().populate("org_id").exec()
-        const user=await Products.find({org_id:org_id}).populate({path:"org_id",select:["name","imageUrl","id"]}                                                                                                                                                                                                                                                                                                                                                                                                           ).exec()
+        // const org_id=req.query.org_id.id
+        // const category_id=req.query.id
+        const user=await Products.find().populate("org_id").exec()
+        // const user=await Products.find(["name","image","id"]).populate({path:"org_id",select:["name","image","id"]}                                                                                                                                                                                                                                                                                                                                                                                                           ).exec()
 
             res.send({status:200,
             success:true,

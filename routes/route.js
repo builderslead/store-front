@@ -5,7 +5,7 @@ const {storeProductBYID,All} = require("../controller/Product")
 const router=express.Router()
 
 
-router.get("/store/getHome",clientsDetails)
+router.get("/store/getHome/:org_id",clientsDetails)
 
 router.get("/store/categories",categorieslist)
 

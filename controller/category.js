@@ -27,14 +27,15 @@ const ApiFeatures = require("../search/apiffeatures")
 const categorieslist= async(req,res)=>{
     try{
         const org_id=req.params.org_id
-        const result=await collection.findById({org_id:org_id})
+        const category=await collection.find(org_id)
         // const result=await collection.find()
 
         res.json({
             status:200,
             sueccs:true,
             message:'Category Details!',
-            categorydetail:result
+            // categorydetail:result,
+            category:category
         })
         
     }catch(err){

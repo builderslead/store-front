@@ -4,6 +4,13 @@
         "BYID",
         "categorieslist",
         "categorydetail's",
+        "codecheck",
+        "customeraddress",
+        "customerschema",
+        "medieaschema",
+        "mobilenumber",
+        "promocode",
+        "Storemedia",
         "sueccs"
     ]
 }

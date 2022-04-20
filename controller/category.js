@@ -27,7 +27,7 @@ const ApiFeatures = require("../search/apiffeatures")
 const categorieslist= async(req,res)=>{
     try{
         const org_id=req.params.org_id
-        const category=await collection.find(org_id)
+        const category=await collection.findOne(org_id)
         // const result=await collection.find()
 
         res.json({

@@ -11,7 +11,7 @@ mongoose.connect(MONGO_URL)
 var products = mongoose.Schema({
     org_id:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"organization",
+        // ref:"organization",
         required:true
     },
     version:{
@@ -36,7 +36,8 @@ var products = mongoose.Schema({
     },
     order:{
         type:Number,
-        required:true
+        required:true,
+        default:1
     },
     status:{
         type:String,

@@ -1,3 +1,4 @@
+const { collection } = require('../model/collections')
 const Products=require('../model/collections')
 
 const storeProductBYID=async(req,res)=>{
@@ -22,11 +23,11 @@ const storeProductBYID=async(req,res)=>{
 }
 
 
-const All=async(req,res)=>{
+const All_CategoryOfProduct=async(req,res)=>{
     try{
-        // const org_id=req.query.org_id.id
-        // const category_id=req.query.id
-        const user=await Products.find().populate("org_id").exec()
+        // const org_id=req.params.org_id.id
+        const category_id=req.query.id
+        const user=await Products.find(category_id)//.populate("org_id").exec()
         // const user=await Products.find(["name","image","id"]).populate({path:"org_id",select:["name","image","id"]}                                                                                                                                                                                                                                                                                                                                                                                                           ).exec()
 
             res.send({status:200,
@@ -40,5 +41,5 @@ const All=async(req,res)=>{
     }
 }
 
-module.exports={All,storeProductBYID}
+module.exports={All_CategoryOfProduct,storeProductBYID}
 

@@ -5,6 +5,9 @@ const { customeraddress } = require("../controller/customersAdd")
 const { Storemedia } = require("../controller/Media")
 const {storeProductBYID,All_CategoryOfProduct} = require("../controller/Product")
 const { promocodeArray } = require("../controller/promo")
+
+const {storeSelfDelLocation}=require("../controller/SelfDelLocation")
+const { storelocationArray } = require("../controller/Store")
 const router=express.Router()
 
 //profile
@@ -23,8 +26,14 @@ router.get("/store/customerAddresses",customeraddress)
 
 //promocode
 
-router.get("/store/promoCodes/:org_id",promocodeArray)
+router.get("/store/promoCodes",promocodeArray)
 
 //storemedia
-router.get("/store/media/:org_id",Storemedia)
+router.get("/store/media",Storemedia)
+
+//selfdellocaton
+router.get("/store/allSelfDelLocations",storeSelfDelLocation)
+
+// Store locationArray
+router.get("/Store/allstores",storelocationArray)
 module.exports=router

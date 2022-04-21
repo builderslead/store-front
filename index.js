@@ -1,7 +1,10 @@
 const express=require("express");
 // require("dotenv").config()
+
+const throwerror=require("./middelwere/error")
 const router=require("./routes/route")
 const app=express()
+app.use(throwerror)
 
 const port=process.env.PORT ||3000;
 

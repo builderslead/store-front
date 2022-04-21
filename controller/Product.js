@@ -1,4 +1,4 @@
-const { collection } = require('../model/collections')
+// const { collection } = require('../model/collections')
 const Products=require('../model/collections')
 
 const storeProductBYID=async(req,res)=>{

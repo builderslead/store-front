@@ -1,25 +1,26 @@
 const {media}=require("../model/mediaschema")
 const ApiFeatures=require("../search/apiffeatures")
 
+const catchAsyncError=require("../errorhandler/chatchasyncerror")
 
-const Storemedia=async(req,res)=>{
-    try{
-        const apiffeatures=new ApiFeatures(media.findOne(),req.query).search() 
-        const mediastore=await apiffeatures.query
-        // const org_id=req.params.org_id
-        // const mediastore=await media.find({org_id:org_id})
-            res.json({
-                status:200,
-                message:" promocode array",
-                mediastore:mediastore
-            })
-    }catch(err){
-         console.log(err)
-        res.json({
-        status:401,
-        message:"promo not found"    
-    })
+const Storemedia=catchAsyncError(async(req, res)=>{
+    // const org_id=req.query.org_id
+    const mediadata=await media.findOne({org_id:req.query.org_id})
+  if(!mediadata){
+        // return next(new ErrorHandler('Category Data not found!',404))
+       return res.send({
+            statusCode:404,
+            success:false,
+            message:'Media Not Found!'
+        })
     }
 
-}
+            res.status(200).json({
+              success:true,
+              message:'Get Media Successfully!',
+              mediadata
+          })
+              
+ 
+  })
 module.exports={Storemedia}

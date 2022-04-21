@@ -4,8 +4,6 @@ const clientsDetails=async(req,res)=>{
     try{
         const id=req.params.org_id
         const clients=await Profile.find({org_id:id})
-        // console.log(Profile);
-        // const clients=await Profile.find()
         res.json({
             status:200,
             message:"clients Details",

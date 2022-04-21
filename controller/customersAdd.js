@@ -4,9 +4,9 @@ const {ApiFeatures}=require("../search/apiffeatures")
 
 exports.customeraddress= async(req,res)=>{
     // try{
-        const apiffeatures=new ApiFeatures(customers.findOne(),req.query).search() 
+        const apiffeatures=new ApiFeatures(customers.find(),req.query).search() 
         const customer=await apiffeatures.query
-        if(customer.mobile!==customer.mobile){
+        if(!customer){
             return res.json({
                 status:404,
                 sueccs:false,

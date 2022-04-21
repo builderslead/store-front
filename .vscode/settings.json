@@ -7,10 +7,20 @@
         "codecheck",
         "customeraddress",
         "customerschema",
+        "Delevarylocation",
+        "mediadata",
         "medieaschema",
         "mobilenumber",
         "promocode",
+        "querycopy",
+        "querystr",
+        "selfdellocation",
+        "selfdellocaton",
+        "statuscode",
+        "storelocation",
         "Storemedia",
-        "sueccs"
+        "storeschema",
+        "sueccs",
+        "throwerror"
     ]
 }

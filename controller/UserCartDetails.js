@@ -31,24 +31,18 @@ const createUserCart=async(req,res)=>{
         }
 }
 
-const storeUsercart=async(req, res,next)=>{
-    try{
-        const storeUserCart=await UserCart.findById({id:req.params._id})
+const storeUsercart=catchAsyncError(async(req, res)=>{
+    
+        const id=req.params._id
+        const storeUserCart=await UserCart.findById(id)
         res.json({
             status:201,
             message:"Get UserCart",
             storeUserCart:storeUserCart 
         })
-    }catch(err){
-        console.log(err);
-        res.json({
-            status:400,
-            message:"UserCart not get",
-            error:err 
-        })
-    }
+   
 
-  }
+  })
 
 const update_userCart=async(req,res)=>{
     try{

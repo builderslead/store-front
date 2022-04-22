@@ -3,7 +3,6 @@ const customers=require("../model/customer")
 const {ApiFeatures}=require("../search/apiffeatures")
 
 exports.customeraddress= async(req,res)=>{
-    // try{
         const apiffeatures=new ApiFeatures(customers.find(),req.query).search() 
         const customer=await apiffeatures.query
         if(!customer){
@@ -23,11 +22,4 @@ exports.customeraddress= async(req,res)=>{
         
         
         
-    // }catch(err){
-    //     console.log(err);
-        // res.json({
-        //     status:404,
-        //     sueccs:false,
-        //     message:'customer Not Found!'
-        // })
-    // }
+    

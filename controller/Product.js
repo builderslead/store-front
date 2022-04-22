@@ -1,5 +1,9 @@
-// const { collection } = require('../model/collections')
-const Products=require('../model/collections')
+const { collection } = require('../model/product')
+const Products=require('../model/product')
+const catchAsyncError=require("../errorhandler/chatchasyncerror")
+const errorhandler=require("../errorhandler/errhandler")
+
+
 
 const storeProductBYID=async(req,res)=>{
  
@@ -23,23 +27,22 @@ const storeProductBYID=async(req,res)=>{
 }
 
 
-const All_CategoryOfProduct=async(req,res)=>{
-    try{
-        // const org_id=req.params.org_id.id
-        const category_id=req.query.id
-        const user=await Products.find(category_id)//.populate("org_id").exec()
-        // const user=await Products.find(["name","image","id"]).populate({path:"org_id",select:["name","image","id"]}                                                                                                                                                                                                                                                                                                                                                                                                           ).exec()
-
-            res.send({status:200,
-            success:true,
-            message:"category of product",
-            user:user
-    })
-    }catch(err){
-        res.send(err)
-        console.log(err);
-    }
-}
+const All_CategoryOfProduct=catchAsyncError(async(req,res)=>{
+        // const _id=req.query._id
+        // const org_id=req.query.org_id
+        const user=await Products.find().populate("org_id").exec()
+        if(!user){
+            return next(new errorhandler('category Data not found!',404))
+        }
+    
+                res.status(200).json({
+                  success:true,
+                  message:'Get category od product Successfully!',
+                  user
+              })
+                  
+     
+      })
 
 module.exports={All_CategoryOfProduct,storeProductBYID}
 

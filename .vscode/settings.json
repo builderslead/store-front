@@ -8,9 +8,11 @@
         "customeraddress",
         "customerschema",
         "Delevarylocation",
+        "insertdata",
         "mediadata",
         "medieaschema",
         "mobilenumber",
+        "Optionsschema",
         "promocode",
         "querycopy",
         "querystr",
@@ -19,8 +21,14 @@
         "statuscode",
         "storelocation",
         "Storemedia",
+        "Storepolice",
+        "storeproduct",
         "storeschema",
+        "Storesupplier",
         "sueccs",
-        "throwerror"
+        "suppliersschema",
+        "throwerror",
+        "usercart",
+        "usercartschema"
     ]
 }

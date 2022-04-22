@@ -1,17 +1,18 @@
 const mongoose=require('mongoose')
 // const { collection } = require('./profileSchema')
 
-var SelfDel = mongoose.Schema({
+var usercartschema = mongoose.Schema({
     org_id:{
         type:mongoose.Schema.Types.String,
+        required:true
     },
     version:{
         type:String,
-        required:[true,'Version required!']
+        required:[true,'Version required!'],
+        default:"v1"
     },
     data:{
-        type:Object,
-        required:true
+        type:Object
     },
     status:{
         type:String,
@@ -19,21 +20,18 @@ var SelfDel = mongoose.Schema({
     },
     
     metadata:{
-        type:Object,
-        required:true
+        type:Object
     },
     notes:{
-        type:Object,
-        required:true
+        type:Object
     },
     created_at:{
         type:Date,
-        required:true
+        default:Date.now
     },
     created_data:{
-        type:Object,
-        required:true
+        type:Object
     }
-} , { collection: 'selfDelLocations' })
-const selfdellocation=mongoose.model("selfDelLocations",SelfDel)
-module.exports={selfdellocation}
+} , { collection: 'usercart' })
+const UserCart=mongoose.model("usercart",usercartschema)
+module.exports={UserCart}

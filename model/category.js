@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 var userSchema = mongoose.Schema({
     org_id:{
         type:mongoose.Schema.Types.ObjectId,
-        // ref:'organization',
+        ref:'organization',
         required:true
     },
     uid:{

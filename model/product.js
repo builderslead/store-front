@@ -10,8 +10,8 @@ mongoose.connect(MONGO_URL)
 
 var products = mongoose.Schema({
     org_id:{
-        type:mongoose.Schema.Types.ObjectId,
-        // ref:"organization",
+        type:mongoose.Schema.Types.String,
+        ref:"collections",
         required:true
     },
     version:{

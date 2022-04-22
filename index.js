@@ -4,12 +4,13 @@ const express=require("express");
 const throwerror=require("./middelwere/error")
 const router=require("./routes/route")
 const app=express()
-app.use(throwerror)
 
 const port=process.env.PORT ||3000;
 
 app.use(express.json());
 app.use("/",router)
+app.use(throwerror)
+
 
 
 app.listen(port,()=>{

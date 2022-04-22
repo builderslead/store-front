@@ -20,14 +20,14 @@ search(){
     this.query=this.query.find({...mobile})
     return this
 }
-filter(){
-    const querycopy={...this.querystring};
-    // const removefields=["l"]
-    let querystr=json.stringify(querycopy)
-    querystr=querystr.replace(/^(\+880|00880|880|01)/ )
-    this.query=this.query.find(querycopy)
-    return this
-}
+// filter(){
+//     const querycopy={...this.querystring};
+//     // const removefields=["l"]
+//     let querystr=json.stringify(querycopy)
+//     querystr=querystr.replace(/^(\+880|00880|880|01)/ )
+//     this.query=this.query.find(querycopy)
+//     return this
+// }
 }
 
 module.exports={ApiFeatures}

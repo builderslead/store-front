@@ -1,13 +1,17 @@
 const mongoose=require('mongoose')
 // const { collection } = require('./profileSchema')
 
-var SelfDel = mongoose.Schema({
+var suppliersschema = mongoose.Schema({
     org_id:{
-        type:mongoose.Schema.Types.String,
+        type:mongoose.Schema.Types.ObjectId
     },
     version:{
         type:String,
         required:[true,'Version required!']
+    },
+    uid:{
+        type:Number,
+        required:true
     },
     data:{
         type:Object,
@@ -34,6 +38,6 @@ var SelfDel = mongoose.Schema({
         type:Object,
         required:true
     }
-} , { collection: 'selfDelLocations' })
-const selfdellocation=mongoose.model("selfDelLocations",SelfDel)
-module.exports={selfdellocation}
+} , { collection: 'suppliers' })
+const supplier=mongoose.model("suppliers",suppliersschema)
+module.exports={supplier}

@@ -1,10 +1,12 @@
 const express=require("express")
+const { Storebanner } = require("../controller/Banner")
+const { Store_blogs, StoreBlogDetails } = require("../controller/Blog")
 const {categorieslist} = require("../controller/category")
-const {clientsDetails}=require("../controller/clients")
+const {clientsDetails, StoreprofileDetails}=require("../controller/profile")
 const { customeraddress } = require("../controller/customersAdd")
 const { Storemedia } = require("../controller/Media")
 const { Storepolice: Storepolices } = require("../controller/policies")
-const {storeProductBYID,All_CategoryOfProduct} = require("../controller/Product")
+const {storeProductBYID,All_CategoryOfProduct,storeProductsYORGid: storeProductbYORGid, storeBestsellers, storefeatured, storeNew_arrival} = require("../controller/Product")
 const { StoreproductOptions } = require("../controller/productopt")
 const { promocodeArray } = require("../controller/promo")
 
@@ -15,7 +17,8 @@ const {createUserCart, update_userCart, Delete_userCart,storeUsercart}=require("
 const router=express.Router()
 
 //profile
-router.get("/store/getHome/:org_id",clientsDetails)
+// router.get("/store/getHome/:org_id",clientsDetails)
+router.get("/store/profile/details/:org_id",StoreprofileDetails)
 
 //category
 router.get("/store/categories",categorieslist)
@@ -23,6 +26,10 @@ router.get("/store/categories",categorieslist)
 //product
 router.get("/store/category/products",All_CategoryOfProduct)
 router.get("/store/product/details",storeProductBYID)
+router.get("/store/AllProduct",storeProductbYORGid)
+router.get("/store/product/bestseller/:org_id",storeBestsellers)
+router.get("/store/product/featured/:org_id",storefeatured)
+router.get("/store/product/new_arrival/:org_id",storeNew_arrival)
 
 //customers
 router.get("/store/customerAddresses",customeraddress)
@@ -56,4 +63,11 @@ router.get("/store/policies/:org_id",Storepolices)
 
 //storeproductOption
 router.get("/store/productOptions/:org_id",StoreproductOptions)
+
+//Storebanner
+router.get("/store/banners",Storebanner)
+
+//store blogs
+router.get("/store/blog/:org_id",Store_blogs)
+router.get("/store/blogs/:_id",StoreBlogDetails)
 module.exports=router

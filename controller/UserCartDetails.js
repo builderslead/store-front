@@ -73,7 +73,7 @@ const update_userCart=async(req,res)=>{
     }
     
 }
-const Delete_userCart=async(req,res)=>{
+const deleteUserCart=async(req,res)=>{
     try{
         const id=req.params.id
         const result=await UserCart.findByIdAndDelete(id)
@@ -92,4 +92,4 @@ const Delete_userCart=async(req,res)=>{
     }
 }
 
-module.exports={createUserCart,update_userCart,Delete_userCart,storeUsercart}
+module.exports={createUserCart,update_userCart,deleteUserCart,storeUsercart}

@@ -2,7 +2,7 @@ const {media}=require("../model/mediaschema")
 const catchAsyncError=require("../errorhandler/chatchasyncerror")
 const ErrorHandler=require("../errorhandler/errhandler")
 
-const Storemedia=catchAsyncError(async(req, res,next)=>{
+const storeMedia=catchAsyncError(async(req, res,next)=>{
     const mediadata=await media.findOne({org_id:req.query.org_id})
   if(!mediadata){
         return next(new ErrorHandler('media Data not found!',404))
@@ -15,4 +15,4 @@ const Storemedia=catchAsyncError(async(req, res,next)=>{
               
  
   })
-module.exports={Storemedia}
+module.exports={storeMedia}

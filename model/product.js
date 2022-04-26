@@ -43,9 +43,8 @@ var products = mongoose.Schema({
             required: true,
           },
         },
-      
+
     },
-  
   notes: {
     type: Object,
     required: true,
@@ -74,6 +73,8 @@ var products = mongoose.Schema({
   },
 });
 const Products = mongoose.model("product", products);
+module.exports={Products}
+
 
 // const mongoose=require('mongoose');
 
@@ -138,4 +139,5 @@ var userSchema = mongoose.Schema(
 
 const organization = mongoose.model("organization", userSchema);
 
-(module.exports = Products), organization;
+// (module.exports = Products), organization;
+module.exports={organization}

@@ -1,17 +1,17 @@
 const { collection } = require("../model/product");
 const Products = require("../model/product");
 const catchAsyncError = require("../errorhandler/chatchasyncerror");
-const errorhandler = require("../errorhandler/errhandler");
+const errorHandler = require("../errorhandler/errhandler");
 
-module.exports.storeProductsYORGid = catchAsyncError(async (req, res, next) => {
-  const StoreProducts = await Products.find({ org_id: req.query.org_id });
-  if (!StoreProducts) {
-    return next(new ErrorHandler(" StoreProducts Not Found!", 404));
+module.exports.storeProductsBYId= catchAsyncError(async (req, res, next) => {
+  const storeProducts = await Products.find({ org_id: req.query.org_id });
+  if (!storeProducts) {
+    return next(new errorHandler(" StoreProducts Not Found!", 404));
   }
   res.status(200).json({
     success: true,
     message: "Get StoreProducts Successfully!",
-    StoreProducts,
+    storeProducts,
   });
 });
 
@@ -29,7 +29,7 @@ module.exports.storeProductBYID = async (req, res) => {
     res.json({
       status: 404,
       sueccs: false,
-      message: "data Not Found!hu6r",
+      message: "data Not Found!",
     });
   }
 };
@@ -39,7 +39,7 @@ module.exports.All_CategoryOfProduct = catchAsyncError(async (req, res) => {
   // const org_id=req.query.org_id
   const user = await Products.find().populate("org_id").exec();
   if (!user) {
-    return next(new errorhandler("category Data not found!", 404));
+    return next(new errorHandler("category Data not found!", 404));
   }
 
   res.status(200).json({
@@ -51,14 +51,14 @@ module.exports.All_CategoryOfProduct = catchAsyncError(async (req, res) => {
 
 
 module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
-  const StoreBestseller = await Products.findOne({org_id:req.params.org_id});
+  const storeBestseller = await Products.findOne({org_id:req.params.org_id});
   // console.log(StoreBestseller.data.tags.bestseller,"hello");
 
-  if (StoreBestseller.data.tags.bestseller === true) {
+  if (storeBestseller.data.tags.bestseller === true) {
     return res.status(200).json({
       success: true,
-      message: "Get StoreBestseller Successfully!",
-      Storefeatured,
+      message: "Get storeBestseller Successfully!",
+      storeBestseller,
     });
   }
   res.status(404).json({
@@ -67,15 +67,15 @@ module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
   });
 });
 
-module.exports.storefeatured = catchAsyncError(async (req, res, next) => {
-  const Storefeatured = await Products.findOne({org_id:req.params.org_id});
+module.exports.storeFeatured = catchAsyncError(async (req, res, next) => {
+  const storefeatured = await Products.findOne({org_id:req.params.org_id});
   // console.log(Storefeatured.data.tags.featured,"hello");
 
-  if (Storefeatured.data.tags.featured === true) {
+  if (storefeatured.data.tags.featured === true) {
     return res.status(200).json({
       success: true,
       message: "Get Store product featured Successfully!",
-      Storefeatured,
+      storefeatured,
     });
   }
   res.status(404).json({

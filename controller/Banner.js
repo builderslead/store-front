@@ -3,7 +3,7 @@ const {banner}=require("../model/banners")
 const catchAsyncError=require("../errorhandler/chatchasyncerror")
 const ErrorHandler=require("../errorhandler/errhandler")
 
-exports.storeBanner=catchAsyncError(async(req, res,next)=>{
+module.exports.storeBanner=catchAsyncError(async(req, res,next)=>{
     const store_banner=await banner.find({org_id:req.query.org_id})
   if(!store_banner){
     return next(new ErrorHandler('store banner Not Found!',404))

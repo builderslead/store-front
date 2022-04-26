@@ -13,7 +13,6 @@ exports.promoCodeArray=catchAsyncError(async(req, res,next)=>{
               success:true,
               message:'Get promo Successfully!',
               promoCode
-          })
-              
+          })        
  
   })

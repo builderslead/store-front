@@ -1,23 +1,27 @@
 const express=require("express")
+
 const { storeBanner } = require("../controller/Banner")
 const { store_blogs, storeBlogDetails } = require("../controller/Blog")
 const {categorieslist} = require("../controller/category")
 const {storeProfileDetails}=require("../controller/profile")
-const { customeraddress } = require("../controller/customersAdd")
+const { customerAddress } = require("../controller/customersAdd")
 const { storeMedia } = require("../controller/Media")
 const { storePolicies} = require("../controller/policies")
-const {storeProductBYID,All_CategoryOfProduct,storeProductsYORGid: storeProductYORGid, storeBestsellers, storeFeatured, storeNew_arrival} = require("../controller/Product")
+const {storeProductBYID,storeBestsellers,storeFeatured,storeNew_arrival,storeProduct,all_CategoryOfProduct} = require("../controller/Product")
 const { storeProductOptions } = require("../controller/productOpt")
-const { promoCodeArray } = require("../controller/promo")
+const {promoCodeArray} = require("../controller/promo")
 
 const {storeSelfDelLocation}=require("../controller/SelfDelLocation")
 const { storeLocationArray } = require("../controller/Store")
 const {storeSupplier } = require("../controller/Supplier")
 const {createUserCart, update_userCart, deleteUserCart,storeUsercart}=require("../controller/UserCartDetails")
 const { Organization } = require("../controller/organization")
-
-const {StoreVendorCategory}=require("../controller/vendorCategory")
+const {createContactQuery}=require("../controller/queries")
+const {createCostumerWishlist,getCustomerWishlist}=require("../controller/wishlist")
+const {storeVendorCategory}=require("../controller/vendorCategory")
 const router=express.Router()
+
+
 
 //profile
 // router.get("/store/getHome/:org_id",clientsDetails)
@@ -26,16 +30,16 @@ router.get("/store/profile/details/:org_id",storeProfileDetails)
 //category
 router.get("/store/categories",categorieslist)
 
-//product
-router.get("/store/category/products",All_CategoryOfProduct)
-router.get("/store/product/details",storeProductBYID)
-router.get("/store/AllProduct",storeProductYORGid)
+// //product
+router.get("/store/category/products",all_CategoryOfProduct)
+router.get("/store/product/details/:_id",storeProductBYID)
+router.get("/store/AllProduct",storeProduct)
 router.get("/store/product/bestseller/:org_id",storeBestsellers)
 router.get("/store/product/featured/:org_id",storeFeatured)
 router.get("/store/product/new_arrival/:org_id",storeNew_arrival)
 
 //customers
-router.get("/store/customerAddresses",customeraddress)
+router.get("/store/customerAddresses",customerAddress)
 
 
 //promocode
@@ -55,7 +59,7 @@ router.get("/Store/allStores",storeLocationArray)
 router.post("/store/userCart/create",createUserCart)
 router.get("/store/Usercart/:_id",storeUsercart)
 router.put("/store/userCart/update",update_userCart)
-router.delete("/store/userCart/delete",deleteUserCart)
+router.delete("/store/userCart/delete/:id",deleteUserCart)
 
 
 //Storesupplier
@@ -75,8 +79,16 @@ router.get("/store/blog/:org_id",store_blogs)
 router.get("/store/blogs/:_id",storeBlogDetails)
 
 //Organizations
-router.get("/store/orgDetails",Organization)
+router.get("/store/orgDetails/:id",Organization)
 
 //StoreVendorCategory
-router.get("/store/vendorCategories/:org_id",StoreVendorCategory)
+router.get("/store/vendorCategories/:org_id",storeVendorCategory)
+
+//customerQueries
+
+router.post("/store/userContactQuery",createContactQuery)
+
+//createCostumerWishlist
+router.post("/store/wishlist",createCostumerWishlist)
+router.get("/store/wishlists/:org_id",getCustomerWishlist)
 module.exports=router

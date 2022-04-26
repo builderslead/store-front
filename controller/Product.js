@@ -1,10 +1,10 @@
 const { collection } = require("../model/product");
-const Products = require("../model/product");
+const {Products} = require("../model/product");
 const catchAsyncError = require("../errorhandler/chatchasyncerror");
 const errorHandler = require("../errorhandler/errhandler");
 
-module.exports.storeProductsBYId= catchAsyncError(async (req, res, next) => {
-  const storeProducts = await Products.find({ org_id: req.query.org_id });
+module.exports.storeProduct= catchAsyncError(async (req, res, next) => {
+  const storeProducts = await Products.find({org_id:req.query.org_id });
   if (!storeProducts) {
     return next(new errorHandler(" StoreProducts Not Found!", 404));
   }
@@ -15,26 +15,22 @@ module.exports.storeProductsBYId= catchAsyncError(async (req, res, next) => {
   });
 });
 
-module.exports.storeProductBYID = async (req, res) => {
-  try {
-    const id = req.query.id;
-    const productDetails = await Products.findById(id);
-    res.json({
-      status: 200,
-      message: "Get category List",
-      productDetails: productDetails,
-    });
-  } catch (err) {
-    console.log(err);
-    res.json({
-      status: 404,
-      sueccs: false,
-      message: "data Not Found!",
-    });
-  }
-};
+exports.storeProductBYID=catchAsyncError(async(req, res,next)=>{
+  const storeProduct=await Products.findById({_id:req.params._id})
+  if(!storeProduct){
+        return next(new errorHandler('Data not found!',404))
+    }
 
-module.exports.All_CategoryOfProduct = catchAsyncError(async (req, res) => {
+            res.status(200).json({
+              success:true,
+              message:'storeProduct Successfully!',
+              storeProduct
+          })        
+
+  })
+
+
+module.exports.all_CategoryOfProduct = catchAsyncError(async (req, res) => {
   // const _id=req.query._id
   // const org_id=req.query.org_id
   const user = await Products.find().populate("org_id").exec();
@@ -69,7 +65,6 @@ module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
 
 module.exports.storeFeatured = catchAsyncError(async (req, res, next) => {
   const storefeatured = await Products.findOne({org_id:req.params.org_id});
-  // console.log(Storefeatured.data.tags.featured,"hello");
 
   if (storefeatured.data.tags.featured === true) {
     return res.status(200).json({

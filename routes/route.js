@@ -15,10 +15,11 @@ const {storeSelfDelLocation}=require("../controller/SelfDelLocation")
 const { storeLocationArray } = require("../controller/Store")
 const {storeSupplier } = require("../controller/Supplier")
 const {createUserCart, update_userCart, deleteUserCart,storeUsercart}=require("../controller/UserCartDetails")
-const { Organization } = require("../controller/organization")
+const { Organization ,organizations } = require("../controller/organization")
 const {createContactQuery}=require("../controller/queries")
 const {createCostumerWishlist,getCustomerWishlist}=require("../controller/wishlist")
-const {storeVendorCategory}=require("../controller/vendorCategory")
+const {storeVendorCategory, searchVendorCategories}=require("../controller/vendorCategory")
+const { searchQuery } = require("../controller/search")
 const router=express.Router()
 
 
@@ -80,9 +81,12 @@ router.get("/store/blogs/:_id",storeBlogDetails)
 
 //Organizations
 router.get("/store/orgDetails/:id",Organization)
+router.get("/store/search",organizations)
 
 //StoreVendorCategory
 router.get("/store/vendorCategories/:org_id",storeVendorCategory)
+router.get("/store/search",searchVendorCategories)
+router.get("/search",searchQuery)
 
 //customerQueries
 

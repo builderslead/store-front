@@ -20,14 +20,26 @@ var organizationSchema = mongoose.Schema({
         required:true
     },
     data:{
-        type:Object,
-        required:true
+        
+        username:{
+            type:String,
+            required:true
+
+        },
+        logo:{
+            type:String
+        },
+        name:{
+            type:String,
+            required:true
+        },
     },
     payment_modes:{
         type:Array,
         required:true
     },
     payment_keys:{
+        
         type:Object,
         required:true
     },
@@ -54,7 +66,7 @@ var organizationSchema = mongoose.Schema({
     created_data:{
         type:Object,
         required:true
-    }
+    },
 },{collection:"organization"})
 
 const organization=mongoose.model("organization",organizationSchema)

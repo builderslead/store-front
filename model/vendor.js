@@ -1,9 +1,9 @@
 const mongoose=require('mongoose')
-// const { collection } = require('./profileSchema')
 
 var vendorSchema = mongoose.Schema({
     org_id:{
-        type:mongoose.Schema.Types.ObjectId
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"organization"
     },
     version:{
         type:String,
@@ -24,6 +24,7 @@ var vendorSchema = mongoose.Schema({
     },
     notes:{
         type:Object,
+        ref:"organization",
         required:true
     },
     created_at:{
@@ -33,7 +34,8 @@ var vendorSchema = mongoose.Schema({
     created_data:{
         type:Object,
         required:true
-    }
+    },
+
 } , { collection: 'vendorCategories' })
 const vendor=mongoose.model("vendorCategories",vendorSchema)
 module.exports={vendor}

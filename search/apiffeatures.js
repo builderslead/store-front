@@ -1,33 +1,35 @@
-// const { query } = require("express")
-
-const { json } = require("express/lib/response")
 
 class ApiFeatures{
     constructor(query,querystring){
     this.query=query
     this.querystring=querystring
 }
+// search(){
+//     const mobile=this.querystring.mobile
+//     ?{
+//         mobilenumber:{    
+//             $regex:this.querystring.mobile
+//             // $option:"i"
+//         },
+//     }
+//     :{}
+//     this.query=this.query.find({...mobile})
+//     return this
+// }
 search(){
-    const mobile=this.querystring.mobile
+    const name=this.querystring.name
     ?{
-        mobilenumber:{    
-            $regex:this.querystring.mobile
+        // data.name:{$regex:this.query.name}},
+        name:{    
+            $regex:this.querystring.name
             // $option:"i"
         },
     }
     :{}
-    // console.log(mobile);
-    this.query=this.query.find({...mobile})
+    this.query=this.query.find({...name})
+
     return this
 }
-// filter(){
-//     const querycopy={...this.querystring};
-//     // const removefields=["l"]
-//     let querystr=json.stringify(querycopy)
-//     querystr=querystr.replace(/^(\+880|00880|880|01)/ )
-//     this.query=this.query.find(querycopy)
-//     return this
-// }
 }
 
 module.exports={ApiFeatures}

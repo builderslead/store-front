@@ -13,3 +13,21 @@ module.exports.storeVendorCategory = catchAsyncError(async (req, res, next) => {
             Store_vendor,
         });
 });
+
+module.exports.searchVendorCategories = catchAsyncError(async (req, res, next) => {
+const searchVendorCategory= await vendor.find({"data.name":req.query.name});
+  if(searchVendorCategory){
+    return res.json({
+          status:200,
+          success:true,
+          message:'Organizations!',
+          searchVendorCategory:searchVendorCategory
+      })    
+    }
+        res.json({
+          status:404,
+          success:false,
+          message:'data Not Found!'
+      })
+
+    })

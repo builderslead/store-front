@@ -2,8 +2,10 @@ const mongoose=require("mongoose")
 
 const customerschema=mongoose.Schema({
     user:{
-        type:Object,
-        required:[true,"user is required"]
+        mobile:{
+            type:String,
+            required:true
+        }
     },
     version:{
         type:String,

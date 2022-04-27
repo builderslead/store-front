@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const MONGO_URL =
-  process.env.MONGO_URL ||
-  "mongodb+srv://bizlexjoe:bizJopAnPoi991@bizlexis-aritt.mongodb.net/bxstorev1?retryWrites=true";
+  process.env.MONGO_URL ||"mongodb+srv://bizlexjoe:bizJopAnPoi991@bizlexis-aritt.mongodb.net/bxstorev1?retryWrites=true";
 mongoose
   .connect(MONGO_URL)
   .then(() => {

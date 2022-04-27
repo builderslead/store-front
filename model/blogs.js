@@ -2,7 +2,7 @@ const mongoose=require('mongoose')
 const { required } = require('nodemon/lib/config')
 // const { collection } = require('./profileSchema')
 
-var blogschema = mongoose.Schema({
+var blogSchema = mongoose.Schema({
     org_id:{
         type:mongoose.Schema.Types.ObjectId,
         required:true
@@ -37,5 +37,5 @@ var blogschema = mongoose.Schema({
         required:true
     }
 } , { collection: 'blogs' })
-const blogs=mongoose.model("blogs",blogschema)
+const blogs=mongoose.model("blogs",blogSchema)
 module.exports={blogs}

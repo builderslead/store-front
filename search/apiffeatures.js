@@ -22,7 +22,7 @@ search(){
         // data.name:{$regex:this.query.name}},
         name:{    
             $regex:this.querystring.name
-            // $option:"i"
+            $option:"i"
         },
     }
     :{}

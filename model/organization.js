@@ -20,6 +20,8 @@ var organizationSchema = mongoose.Schema({
         required:true
     },
     data:{
+        type:Object,
+        ref:"vendorCategories",
         
         username:{
             type:String,
@@ -67,6 +69,10 @@ var organizationSchema = mongoose.Schema({
         type:Object,
         required:true
     },
+    _id:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"vendorCategories"
+    }
 },{collection:"organization"})
 
 const organization=mongoose.model("organization",organizationSchema)

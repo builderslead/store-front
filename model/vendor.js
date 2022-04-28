@@ -1,10 +1,6 @@
 const mongoose=require('mongoose')
 
 var vendorSchema = mongoose.Schema({
-    org_id:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"organization"
-    },
     version:{
         type:String,
         required:[true,'Version required!']
@@ -24,7 +20,6 @@ var vendorSchema = mongoose.Schema({
     },
     notes:{
         type:Object,
-        ref:"organization",
         required:true
     },
     created_at:{
@@ -35,6 +30,11 @@ var vendorSchema = mongoose.Schema({
         type:Object,
         required:true
     },
+    _id:{
+        type:mongoose.Schema.Types.ObjectId,
+        // ref:"organization"
+    }
+
 
 } , { collection: 'vendorCategories' })
 const vendor=mongoose.model("vendorCategories",vendorSchema)

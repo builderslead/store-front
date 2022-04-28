@@ -81,12 +81,12 @@ router.get("/store/blogs/:_id",storeBlogDetails)
 
 //Organizations
 router.get("/store/orgDetails/:id",Organization)
-router.get("/store/search",organizations)
+router.get("/store/search/",searchQuery)
+
+
 
 //StoreVendorCategory
-router.get("/store/vendorCategories/:org_id",storeVendorCategory)
-router.get("/store/search",searchVendorCategories)
-router.get("/search",searchQuery)
+router.get("/store/vendorCategories",storeVendorCategory)
 
 //customerQueries
 

@@ -8,12 +8,12 @@ const app=express()
 
 const port=process.env.PORT ||3000;
 
+app.use(cors({
+    origin: '*'  
+}))
+
 app.use(express.json());
 app.use("/",router)
-app.use(cors({
-    origin:['http://localhost:4002/', 'https://www.bxstore.in/']
-    
-}))
 
 app.use(throwerror)
 

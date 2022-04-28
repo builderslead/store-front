@@ -8,8 +8,8 @@ search(){
     const mobile=this.querystring.mobile
     ?{
         mobilenumber:{    
-            $regex:this.querystring.mobile
-            // $option:"i"
+            $regex:this.querystring.mobile,
+            $option:"i"
         },
     }
     :{}

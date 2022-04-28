@@ -7,8 +7,8 @@ const { organizations } = require("./organization");
 
   
 exports.searchQuery=catchAsyncError (async(req,res)=>{
-    const organizations= await organization.find({"data.name":{$regex:req.query.name}});
-    const vendorCategories= await vendor.find({"data.name":{$regex:req.query.name}});
+    const organizations= await organization.find({"data.name":{$regex:req.query.name,$options:"i"}});
+    const vendorCategories= await vendor.find({"data.name":{$regex:req.query.name,$options:"i"}});
     // console.log(Organization.data,"ho");
       if(organizations || vendorCategories){
             return res.json({

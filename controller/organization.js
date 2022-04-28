@@ -19,23 +19,23 @@ exports.Organization=catchAsyncError(async(req,res,next)=>{
   })
 
   
-exports.organizations=catchAsyncError (async(req,res)=>{
-  const Organization= await organization.find({"data.name":{$regex:req.query.name}});
-    if(Organization===req.query.name){
-      return res.json({
-            status:200,
-            success:true,
-            Organization
-        })
+// exports.organizations=catchAsyncError (async(req,res)=>{
+//   const Organization= await organization.find({"data.name":{$regex:req.query.name}});
+//     if(Organization===req.query.name){
+//       return res.json({
+//             status:200,
+//             success:true,
+//             Organization
+//         })
           
-      }
-          res.json({
-            status:404,
-            success:false,
-            message:'data Not Found!'
-        })
+//       }
+//           res.json({
+//             status:404,
+//             success:false,
+//             message:'data Not Found!'
+//         })
 
-      })
+//       })
    
 
 

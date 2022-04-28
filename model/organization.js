@@ -20,9 +20,7 @@ var organizationSchema = mongoose.Schema({
         required:true
     },
     data:{
-        type:Object,
-        ref:"vendorCategories",
-        
+        type:Object,        
         username:{
             type:String,
             required:true

@@ -3,7 +3,7 @@ const mongoose=require('mongoose')
 
 var usercartschema = mongoose.Schema({
     org_id:{
-        type:mongoose.Schema.Types.String,
+        type:mongoose.Schema.Types.ObjectId,
         required:true
     },
     version:{
@@ -30,7 +30,8 @@ var usercartschema = mongoose.Schema({
     },
     created_at:{
         type:Date,
-        default:Date.now
+        default:new Date,
+        required:true
     },
     created_data:{
         type:Object,

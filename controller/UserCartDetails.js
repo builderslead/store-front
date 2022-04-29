@@ -52,23 +52,23 @@ const update_userCart=(async(req,res)=>{
             message:"update userCart Details"
         })
 })
-const deleteUserCart=catchAsyncError(async(req,res)=>{
+const deleteUserCart=(async(req,res)=>{
+    try{
         const id=req.params._id
         const result=await UserCart.findByIdAndDelete(id)
         res.json({
             status:201,
             message:"deleted userCart",
-            
         })
 
-    // }catch(err){
-    //     res.json({
-    //         status:400,
-    //         message:"userCart not delete",
-    //         error:err 
-    //     })
-    //     console.log(err);
-    // }
-})
-
+    }catch(err){
+        res.json({
+            status:400,
+            message:"userCart not delete",
+            error:err 
+        })
+        console.log(err);
+    }
+}
+)
 module.exports={createUserCart,update_userCart,deleteUserCart,storeUsercart}

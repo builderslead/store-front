@@ -59,9 +59,9 @@ const update_userCart=(async(req,res)=>{
 const deleteUserCart=catchAsyncError(async(req,res)=>{
         const id=req.params._id
         const result=await UserCart.findByIdAndDelete(id)
-        if(!result){
-            return next(new errorHandler('Data not found!',404))
-        }
+        // if(!result){
+        //     return next(new errorHandler('Data not found!',404))
+        // }
         res.json({
             status:201,
             message:"deleted userCart",

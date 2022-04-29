@@ -96,6 +96,7 @@ router.get("/store/vendorCategories",storeVendorCategory)
 router.post("/store/userContactQuery",createContactQuery)
 
 //createCostumerWishlist
-router.post("/store/wishlist/create",createCostumerWishlist)
 router.get("/store/wishlists/:org_id",getCustomerWishlist)
+router.post("/store/wishlist/create",createCostumerWishlist)
+
 module.exports=router

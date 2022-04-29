@@ -30,7 +30,7 @@ exports.createCostumerWishlist=catchAsyncError(async(req,res)=>{
             notes:req.body.notes,
             created_data:req.body.created_data
         }
-        const insertdata=await wishlist.insertMany(createWishlist)
+        const insertdata=await wishlist.create(createWishlist)
             res.json({
                 status:201,
                 message:"New Create customerWishlist",

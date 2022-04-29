@@ -2,7 +2,8 @@ const mongoose=require('mongoose')
 
 var wishlistSchema = mongoose.Schema({
     org_id:{
-        type:mongoose.Schema.Types.ObjectId
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
     },
     version:{
         type:String,

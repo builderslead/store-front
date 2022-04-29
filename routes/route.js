@@ -62,8 +62,8 @@ router.get("/Store/allStores",storeLocationArray)
 //UserCartDetails
 router.post("/store/userCart/create",createUserCart)
 router.get("/store/Usercart/:_id",storeUsercart)
-router.put("/store/userCart/update",update_userCart)
-router.delete("/store/userCart/delete/:id",deleteUserCart)
+router.put("/store/userCart/update/:_id",update_userCart)
+router.delete("/store/userCart/delete/:_id",deleteUserCart)
 
 
 //Storesupplier

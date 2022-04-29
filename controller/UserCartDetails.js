@@ -27,6 +27,10 @@ const storeUsercart=catchAsyncError(async(req, res)=>{
     
         const id=req.params._id
         const storeUserCart=await UserCart.findById(id)
+        if(!storeUserCart){
+            return next(new errorHandler('Data not found!',404))
+        }
+    
         res.json({
             status:201,
             message:"Get userCart",
@@ -35,7 +39,7 @@ const storeUsercart=catchAsyncError(async(req, res)=>{
   })
 
 const update_userCart=(async(req,res)=>{
-        const id=req.query.id
+        const id=req.params._id
         const result =await UserCart.findByIdAndUpdate(id,{
             $set:{
             org_id:req.body.org_id,
@@ -52,23 +56,18 @@ const update_userCart=(async(req,res)=>{
             message:"update userCart Details"
         })
 })
-const deleteUserCart=(async(req,res)=>{
-    try{
+const deleteUserCart=catchAsyncError(async(req,res)=>{
         const id=req.params._id
         const result=await UserCart.findByIdAndDelete(id)
+        if(!result){
+            return next(new errorHandler('Data not found!',404))
+        }
         res.json({
             status:201,
             message:"deleted userCart",
         })
 
-    }catch(err){
-        res.json({
-            status:400,
-            message:"userCart not delete",
-            error:err 
-        })
-        console.log(err);
-    }
+   
 }
 )
 module.exports={createUserCart,update_userCart,deleteUserCart,storeUsercart}

@@ -7,7 +7,7 @@ const {storeProfileDetails}=require("../controller/profile")
 const { customerAddress } = require("../controller/customersAdd")
 const { storeMedia } = require("../controller/Media")
 const { storePolicies} = require("../controller/policies")
-const {storeProductBYID,storeBestsellers,storeFeatured,storeNew_arrival,storeProduct,all_CategoryOfProduct} = require("../controller/Product")
+const {storeProductBYID,storeBestsellers,storeFeatured,storeNew_arrival,storeProduct,allCategoriesProduct} = require("../controller/Product")
 const { storeProductOptions } = require("../controller/productOpt")
 const {promoCodeArray} = require("../controller/promo")
 
@@ -20,22 +20,25 @@ const {createContactQuery}=require("../controller/queries")
 const {createCostumerWishlist,getCustomerWishlist}=require("../controller/wishlist")
 const {storeVendorCategory, searchVendorCategories}=require("../controller/vendorCategory")
 const { searchQuery } = require("../controller/search")
+const { storeHomePage } = require("../controller/storeHome")
 const router=express.Router()
 
 
 
+// storeHomePage
+router.get("/store/getHome",storeHomePage)
+
 //profile
-// router.get("/store/getHome/:org_id",clientsDetails)
 router.get("/store/profile/details/:org_id",storeProfileDetails)
 
 //category
 router.get("/store/categories",categorieslist)
 
 // //product
-router.get("/store/category/products",all_CategoryOfProduct)
+router.get("/store/category/products",allCategoriesProduct)
 router.get("/store/product/details/:_id",storeProductBYID)
 router.get("/store/AllProduct",storeProduct)
-router.get("/store/product/bestseller/:org_id",storeBestsellers)
+router.get("/store/product/bestseller",storeBestsellers)
 router.get("/store/product/featured/:org_id",storeFeatured)
 router.get("/store/product/new_arrival/:org_id",storeNew_arrival)
 

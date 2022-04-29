@@ -4,7 +4,7 @@ const errorhandler=require("../errorhandler/errhandler")
 
 
 exports.promoCodeArray=catchAsyncError(async(req, res,next)=>{
-    const promoCode=await Promo.findOne({org_id:req.query.org_id})
+    const promoCode=await Promo.find({org_id:req.query.org_id})
   if(!promoCode){
         return next(new errorhandler('promo Data not found!',404))
     }

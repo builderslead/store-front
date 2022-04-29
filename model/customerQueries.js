@@ -10,7 +10,7 @@ var queriesSchema = mongoose.Schema({
     },
     data:{
         type:Object,
-        // required:true
+        required:true
     },
     status:{
         type:String,
@@ -19,20 +19,20 @@ var queriesSchema = mongoose.Schema({
     
     metadata:{
         type:Object,
-        // required:true
+        required:true
     },
     notes:{
         type:Object,
-        // required:true
+        required:true
     },
     created_at:{
         type:Date,
-        default:new Date
-        // required:true
+        default:new Date,
+        required:true
     },
     created_data:{
         type:Object,
-        // required:true
+        required:true
     }
 } , { collection: 'customerQueries' })
 const queries=mongoose.model("customerQueries",queriesSchema)

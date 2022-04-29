@@ -20,8 +20,7 @@ exports.getCustomerWishlist=catchAsyncError(async(req, res,next)=>{
  
   })
 
-exports.createCostumerWishlist=async(req,res)=>{
-    try{
+exports.createCostumerWishlist=catchAsyncError(async(req,res)=>{
         const createWishlist={
             org_id:req.body.org_id,
             version:req.body.version,
@@ -37,13 +36,4 @@ exports.createCostumerWishlist=async(req,res)=>{
                 message:"New Create customerWishlist",
                 Data:insertdata 
             })
-        }catch(err){
-            res.json({
-                status:400,
-                message:"customerWishlist not added",
-                error:err 
-            })
-            console.log(err);
-
-        }
-}
+})

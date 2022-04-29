@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 // const { collection } = require('./profileSchema')
 
-var bannersschema = mongoose.Schema({
+var bannersSchema = mongoose.Schema({
     org_id:{
         type:mongoose.Schema.Types.String
     },
@@ -34,5 +34,5 @@ var bannersschema = mongoose.Schema({
         required:true
     }
 } , { collection: 'banners' })
-const banner=mongoose.model("banners",bannersschema)
+const banner=mongoose.model("banners",bannersSchema)
 module.exports={banner}

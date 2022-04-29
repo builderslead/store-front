@@ -28,22 +28,26 @@ var products = mongoose.Schema({
   data: 
     {
       type:Object,
-      required:true
-      // tags: 
-      //   {
-      //     bestseller: {
-      //       type: Boolean,
-      //       required: true,
-      //     },
-      //     featured: {
-      //       type: Boolean,
-      //       required: true,
-      //     },
-      //     new_arrival: {
-      //       type: Boolean,
-      //       required: true,
-      //     },
-      //   },
+      required:true,
+      tags: 
+        {
+          bestseller: {
+            type: Boolean,
+            required: true,
+          },
+          featured: {
+            type: Boolean,
+            required: true,
+          },
+          new_arrival: {
+            type: Boolean,
+            required: true,
+          },
+        },
+        collection:{
+          type:Array,
+          required:true
+        }
 
     },
   notes: {

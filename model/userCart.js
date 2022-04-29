@@ -12,7 +12,8 @@ var usercartschema = mongoose.Schema({
         default:"v1"
     },
     data:{
-        type:Object
+        type:Object,
+        required:true
     },
     status:{
         type:String,
@@ -20,17 +21,20 @@ var usercartschema = mongoose.Schema({
     },
     
     metadata:{
-        type:Object
+        type:Object,
+        required:true
     },
     notes:{
-        type:Object
+        type:Object,
+        required:true
     },
     created_at:{
         type:Date,
         default:Date.now
     },
     created_data:{
-        type:Object
+        type:Object,
+        required:true
     }
 } , { collection: 'usercart' })
 const UserCart=mongoose.model("usercart",usercartschema)

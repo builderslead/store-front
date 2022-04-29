@@ -6,11 +6,11 @@ const errorHandler = require("../errorhandler/errhandler");
 module.exports.storeProduct= catchAsyncError(async (req, res, next) => {
   const storeProducts = await Products.find({org_id:req.query.org_id });
   if (!storeProducts) {
-    return next(new errorHandler(" StoreProducts Not Found!", 404));
+    return next(new errorHandler("storeProducts Not Found!", 404));
   }
   res.status(200).json({
     success: true,
-    message: "Get StoreProducts Successfully!",
+    message: "Get storeProducts Successfully!",
     storeProducts,
   });
 });
@@ -20,41 +20,27 @@ exports.storeProductBYID=catchAsyncError(async(req, res,next)=>{
   if(!storeProduct){
         return next(new errorHandler('Data not found!',404))
     }
-
             res.status(200).json({
               success:true,
               message:'storeProduct Successfully!',
-              storeProduct
+              productDetails:[storeProduct]
           })        
 
   })
 
 
-module.exports.all_CategoryOfProduct = catchAsyncError(async (req, res) => {
-  // const _id=req.query._id
-  // const org_id=req.query.org_id
-  const user = await Products.find().populate("org_id").exec();
-  if (!user) {
-    return next(new errorHandler("category Data not found!", 404));
-  }
 
-  res.status(200).json({
-    success: true,
-    message: "Get category od product Successfully!",
-    user,
-  });
-});
 
 
 module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
-  const storeBestseller = await Products.findOne({org_id:req.params.org_id});
-  // console.log(StoreBestseller.data.tags.bestseller,"hello");
+  const storeBestseller = await Products.findOne({org_id:req.query.org_id});
+  console.log(storeBestseller.data.tags.bestseller,"hello");
 
   if (storeBestseller.data.tags.bestseller === true) {
     return res.status(200).json({
       success: true,
       message: "Get storeBestseller Successfully!",
-      storeBestseller,
+      storeBestseller:[storeBestseller],
     });
   }
   res.status(404).json({
@@ -63,19 +49,21 @@ module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
   });
 });
 
-module.exports.storeFeatured = catchAsyncError(async (req, res, next) => {
-  const storefeatured = await Products.findOne({org_id:req.params.org_id});
 
-  if (storefeatured.data.tags.featured === true) {
+module.exports.storeFeatured= catchAsyncError(async (req, res, next) => {
+  const storeFeatured = await Products.findOne({org_id:req.params.org_id});
+  console.log(storeFeatured.data.tags.featured,"hello");
+
+  if (storeFeatured.data.tags.new_arrival === false) {
     return res.status(200).json({
       success: true,
-      message: "Get Store product featured Successfully!",
-      storefeatured,
+      message: "storeFeatured Successfully!",
+      storeFeatured:[storeFeatured],
     });
   }
   res.status(404).json({
     success: false,
-    message: "Product feature not found",
+    message: "data not found",
   });
 });
 
@@ -87,11 +75,28 @@ module.exports.storeNew_arrival = catchAsyncError(async (req, res, next) => {
     return res.status(200).json({
       success: true,
       message: "Get Store product new_arrival Successfully!",
-      new_arrival,
+      new_arrival:[new_arrival],
     });
   }
   res.status(404).json({
     success: false,
     message: "Product new_arrival not found",
+  });
+});
+
+module.exports.allCategoriesProduct=catchAsyncError(async (req, res, next) => {                            
+const storeBestseller = await Products.find({$or:[{org_id:req.query.org_id},{"data.collection":req.query.uid}]});
+  // console.log(storeBestseller.data.tags.bestseller,"hello");
+
+  if (storeBestseller.data.collection===695649) {
+    return res.status(200).json({
+      success: true,
+      message: "Get storeBestseller Successfully!",
+      storeBestseller:[storeBestseller],
+    });
+  }
+  res.status(404).json({
+    success: false,
+    message: "data not found",
   });
 });

@@ -1,7 +1,8 @@
 const {queries}=require("../model/customerQueries")
+const catchAsyncError=require("../errorhandler/chatchasyncerror")
 
-exports.createContactQuery=async(req,res)=>{
-    try{
+
+exports.createContactQuery=catchAsyncError(async(req,res)=>{
         const createCart={
             org_id:req.body.org_id,
             version:req.body.version,
@@ -17,13 +18,5 @@ exports.createContactQuery=async(req,res)=>{
                 message:"New Create customerQueries",
                 Data:insertdata 
             })
-        }catch(err){
-            res.json({
-                status:400,
-                message:"customerQueries not added",
-                error:err 
-            })
-            console.log(err);
-
-        }
-}
+        
+})

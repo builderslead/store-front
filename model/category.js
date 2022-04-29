@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 var userSchema = mongoose.Schema({
     org_id:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'organization',
+        // ref:'products',
         required:true
     },
     uid:{
@@ -36,4 +36,4 @@ var userSchema = mongoose.Schema({
     }
 },{collection:"collections"})
 const collection=mongoose.model("collections",userSchema)
-    module.exports={collection}
+module.exports={collection}

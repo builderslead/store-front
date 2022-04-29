@@ -1,6 +1,7 @@
 const {UserCart}=require("../model/userCart")
 
 const catchAsyncError=require("../errorhandler/chatchasyncerror")
+const errorHandler=require("../middleware/middleware")
 
 const createUserCart=async(req,res)=>{
     try{
@@ -17,13 +18,13 @@ const createUserCart=async(req,res)=>{
         const insertdata=await UserCart.insertMany(createCart)
             res.json({
                 status:201,
-                message:"New Create UserCart",
+                message:"New Create userCart",
                 Data:insertdata 
             })
         }catch(err){
             res.json({
                 status:400,
-                message:"UserCart not added",
+                message:"userCart not added",
                 error:err 
             })
             console.log(err);
@@ -37,11 +38,9 @@ const storeUsercart=catchAsyncError(async(req, res)=>{
         const storeUserCart=await UserCart.findById(id)
         res.json({
             status:201,
-            message:"Get UserCart",
+            message:"Get userCart",
             storeUserCart:storeUserCart 
         })
-   
-
   })
 
 const update_userCart=async(req,res)=>{
@@ -60,13 +59,13 @@ const update_userCart=async(req,res)=>{
         })
         res.json({
             status:201,
-            message:"update UserCart Details"
+            message:"update userCart Details"
         })
 
     }catch(err){
         res.json({
             status:400,
-            message:"UserCart not update",
+            message:"userCart not update",
             error:err 
         })
         console.log(err);
@@ -79,13 +78,13 @@ const deleteUserCart=async(req,res)=>{
         const result=await UserCart.findByIdAndDelete(id)
         res.json({
             status:201,
-            message:"deleted UserCart",
+            message:"deleted userCart",
         })
 
     }catch(err){
         res.json({
             status:400,
-            message:"UserCart not delete",
+            message:"userCart not delete",
             error:err 
         })
         console.log(err);

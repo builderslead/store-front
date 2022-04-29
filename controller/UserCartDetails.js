@@ -14,7 +14,7 @@ const createUserCart=catchAsyncError(async(req,res)=>{
             created_at:new Date,
             created_data:req.body.created_data
         }
-        const insertdata=await UserCart.insertMany(createCart)
+        const insertdata=await UserCart.create(createCart)
             res.json({
                 status:201,
                 message:"New Create userCart",

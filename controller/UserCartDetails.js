@@ -3,8 +3,7 @@ const {UserCart}=require("../model/userCart")
 const catchAsyncError=require("../errorhandler/chatchasyncerror")
 const errorHandler=require("../middleware/middleware")
 
-const createUserCart=async(req,res)=>{
-    try{
+const createUserCart=catchAsyncError(async(req,res)=>{
         const createCart={
             org_id:req.body.org_id,
             version:req.body.version,
@@ -21,16 +20,8 @@ const createUserCart=async(req,res)=>{
                 message:"New Create userCart",
                 Data:insertdata 
             })
-        }catch(err){
-            res.json({
-                status:400,
-                message:"userCart not added",
-                error:err 
-            })
-            console.log(err);
-
-        }
-}
+  
+})
 
 const storeUsercart=catchAsyncError(async(req, res)=>{
     
@@ -43,8 +34,7 @@ const storeUsercart=catchAsyncError(async(req, res)=>{
         })
   })
 
-const update_userCart=async(req,res)=>{
-    try{
+const update_userCart=(async(req,res)=>{
         const id=req.query.id
         const result =await UserCart.findByIdAndUpdate(id,{
             $set:{
@@ -61,34 +51,16 @@ const update_userCart=async(req,res)=>{
             status:201,
             message:"update userCart Details"
         })
-
-    }catch(err){
-        res.json({
-            status:400,
-            message:"userCart not update",
-            error:err 
-        })
-        console.log(err);
-    }
-    
-}
-const deleteUserCart=async(req,res)=>{
-    try{
+})
+const deleteUserCart=catchAsyncError(async(req,res)=>{
         const id=req.params.id
         const result=await UserCart.findByIdAndDelete(id)
         res.json({
             status:201,
             message:"deleted userCart",
+            result
         })
 
-    }catch(err){
-        res.json({
-            status:400,
-            message:"userCart not delete",
-            error:err 
-        })
-        console.log(err);
-    }
-}
+})
 
 module.exports={createUserCart,update_userCart,deleteUserCart,storeUsercart}

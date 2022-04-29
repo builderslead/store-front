@@ -38,7 +38,7 @@ router.get("/store/categories",categorieslist)
 router.get("/store/category/products",allCategoriesProduct)
 router.get("/store/product/details/:_id",storeProductBYID)
 router.get("/store/AllProduct",storeProduct)
-router.get("/store/product/bestseller",storeBestsellers)
+router.get("/store/product/bestseller/:org_id",storeBestsellers)
 router.get("/store/product/featured/:org_id",storeFeatured)
 router.get("/store/product/new_arrival/:org_id",storeNew_arrival)
 

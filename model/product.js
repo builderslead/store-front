@@ -27,8 +27,6 @@ var products = mongoose.Schema({
   },
   data: 
     {
-      type:Object,
-      required:true,
       tags: 
         {
           bestseller: {

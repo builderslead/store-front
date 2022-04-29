@@ -33,8 +33,8 @@ exports.storeProductBYID=catchAsyncError(async(req, res,next)=>{
 
 
 module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
-  const storeBestseller = await Products.findOne({org_id:req.query.org_id});
-  console.log(storeBestseller.data.tags.bestseller,"hello");
+  const storeBestseller = await Products.findOne({org_id:req.params.org_id});
+  // console.log(storeBestseller.data.tags.bestseller,"hello");
 
   if (storeBestseller.data.tags.bestseller === true) {
     return res.status(200).json({
@@ -52,7 +52,7 @@ module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
 
 module.exports.storeFeatured= catchAsyncError(async (req, res, next) => {
   const storeFeatured = await Products.findOne({org_id:req.params.org_id});
-  console.log(storeFeatured.data.tags.featured,"hello");
+  // console.log(storeFeatured.data.tags.featured,"hello");
 
   if (storeFeatured.data.tags.new_arrival === false) {
     return res.status(200).json({
@@ -85,18 +85,18 @@ module.exports.storeNew_arrival = catchAsyncError(async (req, res, next) => {
 });
 
 module.exports.allCategoriesProduct=catchAsyncError(async (req, res, next) => {                            
-const storeBestseller = await Products.find({$or:[{org_id:req.query.org_id},{"data.collection":req.query.uid}]});
-  // console.log(storeBestseller.data.tags.bestseller,"hello");
+// const storeBestseller = await Products.find({$or:[{org_id:req.query.org_id},{"data.collection":req.query.uid}]});
+//   // console.log(storeBestseller.data.tags.bestseller,"hello");
 
-  if (storeBestseller.data.collection===695649) {
-    return res.status(200).json({
-      success: true,
-      message: "Get storeBestseller Successfully!",
-      storeBestseller:[storeBestseller],
-    });
-  }
-  res.status(404).json({
-    success: false,
-    message: "data not found",
-  });
+//   if (storeBestseller.data.collection===695649) {
+//     return res.status(200).json({
+//       success: true,
+//       message: "Get storeBestseller Successfully!",
+//       storeBestseller:[storeBestseller],
+//     });
+//   }
+//   res.status(404).json({
+//     success: false,
+//     message: "data not found",
+//   });
 });

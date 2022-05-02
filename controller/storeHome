@@ -1,30 +1,26 @@
-const {banner}=require("../model/banners")
-const {collection}=require("../model/category")
+const { banner } = require("../model/banners");
+const { collection } = require("../model/category");
 const catchAsyncError = require("../errorhandler/chatchasyncerror");
-const {Products} = require("../model/product");
+const { Products } = require("../model/product");
 const errorHandler = require("../errorhandler/errhandler");
 
+exports.storeHomePage = catchAsyncError(async (req, res, next) => {
+  const banners = await banner.find({ org_id: req.query.org_id });
+  const products = await Products.find({ org_id: req.query.org_id });
+  const categories = await collection.find({ org_id: req.query.org_id });
 
-exports.storeHomePage=catchAsyncError(async(req, res,next)=>{
-    const banners=await banner.find({org_id:req.query.org_id})
-    const products=await Products.find({org_id:req.query.org_id})   
-    const categories= await collection.find({org_id:req.query.org_id})
-
-
-    if(categories ||products ||banners){
-
-        return res.json({
-            status:200,
-            success:true,
-            banners,
-            products,
-            categories
-        })
-            
-        }
-            res.json({
-            status:404, 
-            success:false,
-            message:'data Not Found!'
-        })
-})
+  if (categories || products || banners) {
+    return res.json({
+      status: 200,
+      success: true,
+      banners,
+      products,
+      categories,
+    });
+  }
+  res.json({
+    status: 404,
+    success: false,
+    message: "data Not Found!",
+  });
+});

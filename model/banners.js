@@ -1,38 +1,41 @@
-const mongoose=require('mongoose')
+const mongoose = require("mongoose");
 // const { collection } = require('./profileSchema')
 
-var bannersSchema = mongoose.Schema({
-    org_id:{
-        type:mongoose.Schema.Types.String
+var bannersSchema = mongoose.Schema(
+  {
+    org_id: {
+      type: mongoose.Schema.Types.String,
     },
-    version:{
-        type:String,
-        required:[true,'Version required!']
+    version: {
+      type: String,
+      required: [true, "Version required!"],
     },
-    uid:{
-        type:Number,
-        required:true
+    uid: {
+      type: Number,
+      required: true,
     },
-    data:{
-        type:Object,
-        required:true
+    data: {
+      type: Object,
+      required: true,
     },
-    notes:{
-        type:Object,
-        required:true
+    notes: {
+      type: Object,
+      required: true,
     },
-    status:{
-        type:String,
-        required:[true,'Status required!']
+    status: {
+      type: String,
+      required: [true, "Status required!"],
     },
-    created_at:{
-        type:Date,
-        required:true
+    created_at: {
+      type: Date,
+      required: true,
     },
-    created_data:{
-        type:Object,
-        required:true
-    }
-} , { collection: 'banners' })
-const banner=mongoose.model("banners",bannersSchema)
-module.exports={banner}
+    created_data: {
+      type: Object,
+      required: true,
+    },
+  },
+  { collection: "banners" }
+);
+const banner = mongoose.model("banners", bannersSchema);
+module.exports = { banner };

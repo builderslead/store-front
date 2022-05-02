@@ -1,34 +1,42 @@
-const mongoose=require('mongoose')
+const mongoose = require("mongoose");
 // const { collection } = require('./profileSchema')
 
-var storeschema = mongoose.Schema({
-    org_id:{
-        type:mongoose.Schema.Types.String,
+var storeschema = mongoose.Schema(
+  {
+    org_id: {
+      type: mongoose.Schema.Types.String,
     },
-    version:{
-        type:String,
-        required:[true,'Version required!']
+    version: {
+      type: String,
+      required: [true, "Version required!"],
     },
-    data:{
-        type:Object
+    data: {
+      type: Object,
+      required: true,
     },
-    status:{
-        type:String,
-        required:[true,'Status required!']
+    status: {
+      type: String,
+      required: [true, "Status required!"],
     },
-    
-    metadata:{
-        type:Object
+
+    metadata: {
+      type: Object,
+      required: true,
     },
-    notes:{
-        type:Object
+    notes: {
+      type: Object,
+      required: true,
     },
-    created_at:{
-        type:Date,
+    created_at: {
+      type: Date,
+      required: true,
     },
-    created_data:{
-        type:Object
-    }
-} , { collection: 'stores' })
-const store=mongoose.model("stores",storeschema)
-module.exports={store}
+    created_data: {
+      type: Object,
+      required: true,
+    },
+  },
+  { collection: "stores" }
+);
+const store = mongoose.model("stores", storeschema);
+module.exports = { store };

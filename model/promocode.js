@@ -1,34 +1,43 @@
-const mongoose=require('mongoose')
+const mongoose = require("mongoose");
 // const { collection } = require('./profileSchema')
 
-var promos = mongoose.Schema({
-    org_id:{
-        type:mongoose.Schema.Types.String,
+var promos = mongoose.Schema(
+  {
+    org_id: {
+      type: mongoose.Schema.Types.String,
+      required: true,
     },
-    version:{
-        type:String,
-        required:[true,'Version required!']
+    version: {
+      type: String,
+      required: [true, "Version required!"],
     },
-    data:{
-        type:Object
+    data: {
+      type: Object,
+      required: true,
     },
-    status:{
-        type:String,
-        required:[true,'Status required!']
+    status: {
+      type: String,
+      required: [true, "Status required!"],
     },
-    
-    metadata:{
-        type:Object
+
+    metadata: {
+      type: Object,
+      required: true,
     },
-    notes:{
-        type:Object
+    notes: {
+      type: Object,
+      required: true,
     },
-    created_at:{
-        type:Date,
+    created_at: {
+      type: Date,
+      required: true,
     },
-    created_data:{
-        type:Object
-    }
-} , { collection: 'promoCodes' })
-const Promo=mongoose.model("promoCodes",promos)
-module.exports={Promo}
+    created_data: {
+      type: Object,
+      required: true,
+    },
+  },
+  { collection: "promoCodes" }
+);
+const Promo = mongoose.model("promoCodes", promos);
+module.exports = { Promo };

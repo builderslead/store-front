@@ -1,11 +1,10 @@
 const { collection } = require("../model/category");
-const {Products} = require("../model/product");
+const { Products } = require("../model/product");
 const catchAsyncError = require("../errorhandler/chatchasyncerror");
 const errorHandler = require("../errorhandler/errhandler");
-const { query } = require("express");
 
-module.exports.storeProduct= catchAsyncError(async (req, res, next) => {
-  const storeProducts = await Products.find({org_id:req.query.org_id });
+module.exports.storeProduct = catchAsyncError(async (req, res, next) => {
+  const storeProducts = await Products.find({ org_id: req.query.org_id });
   if (!storeProducts) {
     return next(new errorHandler("storeProducts Not Found!", 404));
   }
@@ -16,81 +15,87 @@ module.exports.storeProduct= catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.storeProductBYID=catchAsyncError(async(req, res,next)=>{
-  const storeProduct=await Products.findById({_id:req.params._id})
-  if(!storeProduct){
-        return next(new errorHandler('Data not found!',404))
-    }
-            res.status(200).json({
-              success:true,
-              message:'storeProduct Successfully!',
-              productDetails:[storeProduct]
-          })        
-
-  })
-
-
-
-
-
-module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
-  const storeBestseller = await Products.findOne({org_id:req.params.org_id});
-  // console.log(storeBestseller.data.tags.bestseller,"hello");
-
-  if (storeBestseller.data.tags.bestseller === true) {
-    return res.status(200).json({
-      success: true,
-      message: "Get storeBestseller Successfully!",
-      storeBestseller:[storeBestseller],
-    });
+exports.storeProductBYID = catchAsyncError(async (req, res, next) => {
+  const storeProduct = await Products.findById({ _id: req.params._id });
+  if (!storeProduct) {
+    return next(new errorHandler("Data not found!", 404));
   }
-  res.status(404).json({
-    success: false,
-    message: "data not found",
+  res.status(200).json({
+    success: true,
+    message: "storeProduct Successfully!",
+    productDetails: [storeProduct],
   });
 });
 
+module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
+  const storeBestseller = await Products.find({ org_id: req.params.org_id });
+  // console.log(storeBestseller.data.tags.bestseller,"hello");
+  console.log(storeBestseller.length);
+  for (i = 0; storeBestseller.length; i++) {
+    if (storeBestseller[i].data.tags.bestseller === true) {
+      return res.status(200).json({
+        success: true,
+        message: "Get storeBestseller Successfully!",
+        storeBestseller,
+      });
+    } else {
+      return next(new errorHandler("data not Found!", 404));
+    }
+  }
 
-module.exports.storeFeatured= catchAsyncError(async (req, res, next) => {
-  const storeFeatured = await Products.findOne({org_id:req.params.org_id});
-  // console.log(storeFeatured.data.tags.featured,"hello");
+  res.status(404).json({
+    success: false,
+    message: "bad request",
+  });
+});
 
-  if (storeFeatured.data.tags.new_arrival === false) {
+module.exports.storeFeatured = catchAsyncError(async (req, res, next) => {
+  const featured = await Products.find({
+    org_id: req.params.org_id,
+    "data.tags.featured": true,
+  });
+  if (featured) {
     return res.status(200).json({
       success: true,
       message: "storeFeatured Successfully!",
-      storeFeatured:[storeFeatured],
+      featured,
     });
   }
-  res.status(404).json({
+  res.send({
     success: false,
-    message: "data not found",
+    status: 400,
+    message: "data not exist",
   });
 });
 
 module.exports.storeNew_arrival = catchAsyncError(async (req, res, next) => {
-  const new_arrival = await Products.findOne({org_id:req.params.org_id});
-  // console.log(Storefeatured.data.tags.featured,"hello");
-
-  if (new_arrival.data.tags.new_arrival === false) {
-    return res.status(200).json({
-      success: true,
-      message: "Get Store product new_arrival Successfully!",
-      new_arrival:[new_arrival],
+  const new_arrival = await Products.find({
+    org_id: req.params.org_id,
+    "data.tags.new_arrival": true,
+  });
+  if (!new_arrival) {
+    res.send({
+      success: false,
+      status: 400,
+      message: "data not exist",
     });
   }
-  res.status(404).json({
-    success: false,
-    message: "Product new_arrival not found",
+  return res.status(200).json({
+    success: true,
+    message: "new_arrival Successfully!",
+    new_arrival,
   });
 });
 
-module.exports.allCategoriesProduct=catchAsyncError(async (req, res, next) => {                            
-    const category=await collection.findOne({uid:req.query.uid})
-    const product=await Products.find({"org_id":req.query.org_id, "data.collection": parseInt(req.query.uid)})
+module.exports.allCategoriesProduct = catchAsyncError(
+  async (req, res, next) => {
+    const category = await collection.findOne({ uid: req.query.uid });
+    const product = await Products.find({
+      org_id: req.query.org_id,
+      "data.collection": parseInt(req.query.uid),
+    });
 
-    console.log(product.length,"hello");
-    const matchedProducts = []
+    console.log(product.length, "hello");
     if (category.status === "active") {
       return res.status(200).json({
         success: true,
@@ -98,9 +103,10 @@ module.exports.allCategoriesProduct=catchAsyncError(async (req, res, next) => {
         product,
       });
     }
-    
-      res.status(404).json({
-        success: false,
-        message: "data not found",
-      });
-});
+
+    res.status(404).json({
+      success: false,
+      message: "data not found",
+    });
+  }
+);

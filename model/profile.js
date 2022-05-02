@@ -1,51 +1,56 @@
-const mongoose=require("mongoose")
+const mongoose = require("mongoose");
 
-const profile=mongoose.Schema({
-    client:{
-        type:String,
-        required:true,
+const profile = mongoose.Schema(
+  {
+    client: {
+      type: String,
+      required: true,
     },
-    client_id:{
-        type:String,
-        required:[true,'Client_id required'],
+    client_id: {
+      type: String,
+      required: [true, "Client_id required"],
     },
-    org_id:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref:'organization'
+    org_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "organization",
     },
-    version:{
-        type:String,
-        required:[true,'Version required']
-    }, 
-    data:
-    {
-        type:Object,
-        
+    version: {
+      type: String,
+      required: [true, "Version required"],
     },
-    notes:{
-        type:Object
+    data: {
+      type: Object,
+      required:true
     },
-    metadata:{
-        type:Object
+    notes: {
+      type: Object,
+      required:true
     },
-    role:{
-        type:String,
-        default:'user'
+    metadata: {
+      type: Object,
+      required:true
     },
-    status:{
-        type:String,
-        required:true
+    role: {
+      type: String,
+      default: "user",
     },
-    created_at:{
-        type:Date
+    status: {
+      type: String,
+      required: true,
     },
-    created_data:{
-        type:Object        
-    }
+    created_at: {
+      type: Date,
+      required:true
+    },
+    created_data: {
+      type: Object,
+      required:true
+    },
+  },
+  { collection: "profile" }
+);
 
-}, { collection: 'profile' })
+const Profile = mongoose.model("profile", profile);
 
-const Profile= mongoose.model('profile',profile)
-
-module.exports={Profile}
+module.exports = { Profile };

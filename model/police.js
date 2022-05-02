@@ -1,37 +1,40 @@
-const mongoose=require('mongoose')
+const mongoose = require("mongoose");
 // const { collection } = require('./profileSchema')
 
-var policiesschema = mongoose.Schema({
-    org_id:{
-        type:mongoose.Schema.Types.String,
-        required:true
+var policiesSchema = mongoose.Schema(
+  {
+    org_id: {
+      type: mongoose.Schema.Types.String,
+      required: true,
     },
-    version:{
-        type:String,
-        required:[true,'Version required!'],
-        default:"v1"
+    version: {
+      type: String,
+      required: [true, "Version required!"],
+      default: "v1",
     },
-    data:{
-        type:Object
+    data: {
+      type: Object,
     },
-    status:{
-        type:String,
-        required:[true,'Status required!']
+    status: {
+      type: String,
+      required: [true, "Status required!"],
     },
-    
-    metadata:{
-        type:Object
+
+    metadata: {
+      type: Object,
     },
-    notes:{
-        type:Object
+    notes: {
+      type: Object,
     },
-    created_at:{
-        type:Date,
-        default:Date.now
+    created_at: {
+      type: Date,
+      default: Date.now,
     },
-    created_data:{
-        type:Object
-    }
-} , { collection: 'policies' })
-const police=mongoose.model("policies",policiesschema)
-module.exports={police}
+    created_data: {
+      type: Object,
+    },
+  },
+  { collection: "policies" }
+);
+const police = mongoose.model("policies", policiesSchema);
+module.exports = { police };

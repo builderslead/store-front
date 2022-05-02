@@ -1,7 +1,8 @@
-const { collection } = require("../model/product");
+const { collection } = require("../model/category");
 const {Products} = require("../model/product");
 const catchAsyncError = require("../errorhandler/chatchasyncerror");
 const errorHandler = require("../errorhandler/errhandler");
+const { query } = require("express");
 
 module.exports.storeProduct= catchAsyncError(async (req, res, next) => {
   const storeProducts = await Products.find({org_id:req.query.org_id });
@@ -85,18 +86,21 @@ module.exports.storeNew_arrival = catchAsyncError(async (req, res, next) => {
 });
 
 module.exports.allCategoriesProduct=catchAsyncError(async (req, res, next) => {                            
-const storeBestseller = await Products.find({$or:[{org_id:req.query.org_id},{"data.collection":req.query.uid}]});
-  // console.log(storeBestseller.data.tags.bestseller,"hello");
+    const category=await collection.findOne({uid:req.query.uid})
+    const product=await Products.find({"org_id":req.query.org_id, "data.collection": parseInt(req.query.uid)})
 
-  if (storeBestseller.data.collection===695649) {
-    return res.status(200).json({
-      success: true,
-      message: "Get storeBestseller Successfully!",
-      storeBestseller:[storeBestseller],
-    });
-  }
-  res.status(404).json({
-    success: false,
-    message: "data not found",
-  });
+    console.log(product.length,"hello");
+    const matchedProducts = []
+    if (category.status === "active") {
+      return res.status(200).json({
+        success: true,
+        message: "Get store category of product Successfully!",
+        product,
+      });
+    }
+    
+      res.status(404).json({
+        success: false,
+        message: "data not found",
+      });
 });

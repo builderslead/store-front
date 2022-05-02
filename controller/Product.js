@@ -50,6 +50,7 @@ module.exports.storeBestsellers = catchAsyncError(async (req, res, next) => {
 });
 
 module.exports.storeFeatured = catchAsyncError(async (req, res, next) => {
+
   const featured = await Products.find({
     org_id: req.params.org_id,
     "data.tags.featured": true,
@@ -70,22 +71,24 @@ module.exports.storeFeatured = catchAsyncError(async (req, res, next) => {
 
 module.exports.storeNew_arrival = catchAsyncError(async (req, res, next) => {
   const new_arrival = await Products.find({
-    org_id: req.params.org_id,
-    "data.tags.new_arrival": true,
+    org_id: req.params.org_id});
+    for (i = 0; new_arrival.length; i++) {
+      if (new_arrival[i].data.tags.new_arrival === true) {
+        return res.status(200).json({
+          success: true,
+          message: "new_arrival Successfully!",
+          new_arrival,
+        });
+      }
+        res.send({
+          success: false,
+          status: 400,
+          message: "data not exist",
+        });
+    }
   });
-  if (!new_arrival) {
-    res.send({
-      success: false,
-      status: 400,
-      message: "data not exist",
-    });
-  }
-  return res.status(200).json({
-    success: true,
-    message: "new_arrival Successfully!",
-    new_arrival,
-  });
-});
+
+ 
 
 module.exports.allCategoriesProduct = catchAsyncError(
   async (req, res, next) => {

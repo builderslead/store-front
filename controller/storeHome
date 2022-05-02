@@ -9,7 +9,7 @@ exports.storeHomePage = catchAsyncError(async (req, res, next) => {
   const products = await Products.find({ org_id: req.query.org_id });
   const categories = await collection.find({ org_id: req.query.org_id });
 
-  if (categories || products || banners) {
+  if (categories && products &&banners) {
     return res.json({
       status: 200,
       success: true,
